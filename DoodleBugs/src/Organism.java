@@ -37,7 +37,7 @@ import java.util.Random;
 //		{return false;}
 //		return true;
 	
-	 private void move(Organism org) {
+	 public void move() {
 	
 	{
 		int newLoc = thisRand(4)+1;
@@ -71,7 +71,7 @@ import java.util.Random;
     }
 	
 	 public boolean isCellEmpty(int xcood, int ycood) {
-			if(! cells[xcood][ycood] instanceof GridPoint )
+			if(!( cells[xcood][ycood] instanceof GridPoint ))
 			{return false;}
 			return true;
 		}

@@ -5,8 +5,8 @@ public class World {
 	private final int WIDTH = 20;
 	private Organism cells[][]; // (0,0) is considered the upper left corner
 	private Random generator; // Use of a Random generator lets us provide same
-	Ant g = new Ant(0,0);	
-	Doodlebug newDoodlebug = new Doodlebug(0,0);
+//	Ant g = new Ant(0,0);	
+//	Doodlebug newDoodlebug = new Doodlebug(0,0);
 								// sequence of "random" numbers. Consequently,
 								// the
 								// simulation will be identical each run, aiding

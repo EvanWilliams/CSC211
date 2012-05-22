@@ -27,8 +27,9 @@ public class Doodle {
 			theMap.moveAllAnts();
 			System.out.println("After moving ants...\n"+theMap);
 			// Decomment the next line when you are ready to test the movement of doodlebugs    
-			 theMap.moveAllDoodles();
+			theMap.moveAllDoodles();
 			System.out.println("After moving the doodles...\n"+theMap);
+			theMap.countAllOrganisms();
 			// Decomment the next line when you are ready to start testing biology
 			// theMap.doAllBiology();  // Also clears Move flags
 			// Debugging... System.out.println("After biology...\n"+theMap);

@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class World {
-	int NumAnts = 0;
-	int NumDoodles = 0;
+	private int NumAnts = 0;
+	private int NumDoodles = 0;
 
 	public GridPoint[][] getCells() {
 		return cells;
@@ -36,7 +36,8 @@ public class World {
 			return null;
 		return cells[x][y];
 	}
-
+	
+	
 	/**
 	 * @param x
 	 *            horizontal grid coordinate
@@ -223,13 +224,28 @@ public class World {
 			for (int x = 0; x < Constants.WIDTH; x++) {
 				if (getCell(x, y) instanceof Ant)
 					{((Organism)(getCells())[x][y]).move(x, y);
-					NumAnts++;}
+					}
 				
 					
 			}
 		}
 	}
 
+	public void countAllOrganisms(){
+		NumDoodles = 0;
+		NumAnts = 0;
+		
+		for (int y = 0; y < Constants.HEIGHT; y++) {
+			for (int x = 0; x < Constants.WIDTH; x++) {
+				if (getCell(x, y) instanceof Doodlebug)
+					NumDoodles++;
+				else if (getCell(x, y) instanceof Ant)
+					NumAnts++;
+					//secondChance(x,y);
+	}
+		}
+	}
+	
 	public void ClearAllMoveF() {
 		for (int y = 0; y < Constants.HEIGHT; y++) {
 			for (int x = 0; x < Constants.WIDTH; x++) {
@@ -244,8 +260,6 @@ public class World {
 		System.out.println("Number of Doodles "+NumDoodles);
 //		while(NumDoodles = 0)
 //			System.out.println("There are no Doodles. The Ants are Victorious!");
-		NumAnts=0;
-		NumDoodles=0;
 	}
 	
 	/**

@@ -19,9 +19,9 @@ public class Ant extends Organism {
 	/* Ants try to move to an adjacent empty square.  
 	 * @see Organism#move()
 	 */
-	public void move() {
-	  	moveToEmpty();
-	}
+//	public void move() {
+//	  	moveToEmpty();
+//	}
 	
 //	public String toString() {
 //		String result="a";

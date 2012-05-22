@@ -51,7 +51,8 @@ abstract public class Organism extends GridPoint {
 
 	public void move(int locX,int locY) {
 
-		{
+		if(hasMoved())
+			return;	
 			int newLoc = thisRand(4) + 1;
 			switch (newLoc)
 
@@ -59,37 +60,43 @@ abstract public class Organism extends GridPoint {
 			// North
 			case 1:
 				if (isCellEmpty(locX, locY + 1)) {
-					myMap.getCells()[locX][locY] = new GridPoint();
-					myMap.getCells()[locX][locY+1] =this;
+					kill(locX,locY);
+					myMap.getCells()[locX][locY+1] = this;
+					setMoveFlag();
 				}
 				break;
 			// East
 			case 2:
 				if (isCellEmpty(locX + 1, locY)) {
-					myMap.getCells()[locX][locY] = new GridPoint();
-					myMap.getCells()[locX+1][locY] =this;
+					kill(locX,locY);
+					myMap.getCells()[locX+1][locY] = this;
+					setMoveFlag();
 				}
 				break;
 			// South
 			case 3:
 				if (isCellEmpty(locX, locY - 1)) {
-					myMap.getCells()[locX][locY] = new GridPoint();
+					kill(locX,locY);
 					myMap.getCells()[locX][locY-1] =this;
+					setMoveFlag();
 				}
 				break;
 			// West
 			case 4:
 				if (isCellEmpty(locX - 1, locY)) {
-					myMap.getCells()[locX][locY] = new GridPoint();
+					kill(locX,locY);
 					myMap.getCells()[locX-1][locY] =this;
+					setMoveFlag();
 				}
 				break;
 			}
 		}
 
-	}
+	
 
 	public boolean isCellEmpty(int xcood, int ycood) {
+		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+			return false;
 		if (myMap.getCells()[xcood][ycood] instanceof Organism) {
 			return false;
 		}
@@ -103,6 +110,13 @@ abstract public class Organism extends GridPoint {
 		hasMoved = false;
 	}
 
+	public void setMoveFlag() {
+		hasMoved = true;
+	}
+	
+	public boolean hasMoved() {
+		return hasMoved;
+	}
 	/**
 	 * Remove the organism from the world. TODO make kill return a gridpoint not
 	 * null

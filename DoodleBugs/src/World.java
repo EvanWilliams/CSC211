@@ -1,9 +1,7 @@
 import java.util.Random;
 
 public class World {
-	private final int HEIGHT = 20;
-	private final int WIDTH = 20;
-	
+
 	public GridPoint[][] getCells() {
 		return cells;
 	}
@@ -32,9 +30,9 @@ public class World {
 	 *         of the that cell. This will either be an Organism or null.
 	 */
 	public GridPoint getCell(int x, int y) {
-		if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		if (x < 0 || x >= Constants.WIDTH || y < 0 || y >= Constants.HEIGHT)
 			return null;
-		return cells[y][x];
+		return cells[x][y];
 	}
 
 	/**
@@ -46,7 +44,7 @@ public class World {
 	 *            Organism to place in the world
 	 */
 	public void setCell(int x, int y, GridPoint Grid) {
-		cells[y][x] = Grid;
+		cells[x][y] = Grid;
 	}
 	
 
@@ -88,26 +86,26 @@ public class World {
 	 *            The number of Doodlebuggs to place randomly in the grid.
 	 */
 	public World(int numAnts, int numDoodles) {
-		 int x = numAnts;
-		 int y = numDoodles;
+		 int noA = numAnts;
+		 int noD = numDoodles;
 		// [Exactly one of the next two lines should be commented out...]
 		// generator = new Random(1000L); // Each run will be the same. Can use
 		// any long as the seed.
 		generator = new Random(); // With no seed specified, each run will be
 									// different.
-		cells = new GridPoint[HEIGHT][WIDTH];
+		cells = new GridPoint[Constants.WIDTH][Constants.HEIGHT];
 		
-		for(int j = 0; j<WIDTH; j++){
-			for(int k = 0; k<HEIGHT; k ++){
+		for(int j = 0; j<Constants.WIDTH; j++){
+			for(int k = 0; k<Constants.HEIGHT; k ++){
 			GridPoint newGridpoint = new GridPoint();
-			setCell(k, j, newGridpoint);
+			setCell(j, k, newGridpoint);
 			}
 		}
 		
-		for (int i = 0; i < x; i++) {
+		for (int i = 0; i < noA; i++) {
 			int newLoc = myRand(400);
-			int XcoodA = (newLoc / HEIGHT);
-			int YcoodA = (newLoc % HEIGHT);
+			int XcoodA = (newLoc / Constants.WIDTH);
+			int YcoodA = (newLoc % Constants.HEIGHT);
 			
 			if (isCellEmpty(XcoodA, YcoodA)) {
 				Ant newAnt = new Ant (XcoodA,YcoodA,this);
@@ -116,7 +114,7 @@ public class World {
 			
 		}
 		
-		for(int i = 0; i < y; i++){
+		for(int i = 0; i < noD; i++){
 			int newLoc = myRand(400);
 			int XcoodA = (newLoc / 20);
 			int YcoodA = (newLoc % 20);
@@ -158,12 +156,12 @@ public class World {
 	 */
 	public String toString() {
 		String result = "";
-		for (int j = 0; j < HEIGHT; j++) {
+		for (int j = 0; j < Constants.HEIGHT; j++) {
 			String strOut = String.format("%2d=", ((j + 1) % 10));
 			System.out.print(strOut);
 
-			for (int i = 0; i < WIDTH; i++)
-				System.out.print(cells[j][i]);
+			for (int i = 0; i < Constants.WIDTH; i++)
+				System.out.print(cells[i][j]);
 			System.out.println();
 		}
 		// YOUR CODE HERE to build result to be a printed representation of the
@@ -196,14 +194,22 @@ public class World {
 	 * Move all the ants.
 	 */
 	public void moveAllAnts() {
-		for (int y = 0; y < HEIGHT; y++) {
-			for (int x = 0; x < WIDTH; x++) {
+		for (int y = 0; y < Constants.HEIGHT; y++) {
+			for (int x = 0; x < Constants.WIDTH; x++) {
 				if (getCell(x, y) instanceof Ant)
-					((Organism)getCell(x, y)).move(x, y);
+					((Organism)(getCells())[x][y]).move(x, y);
 			}
 		}
 	}
 
+	public void ClearAllMoveF() {
+		for (int y = 0; y < Constants.HEIGHT; y++) {
+			for (int x = 0; x < Constants.WIDTH; x++) {
+				if (getCell(x, y) instanceof Organism)
+					((Organism)getCell(x, y)).clearMoveFlag() ;
+			}
+		}
+	}
 	/**
 	 * Move all the doodlebugs.
 	 */

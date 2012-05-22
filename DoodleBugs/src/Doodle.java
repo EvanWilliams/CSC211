@@ -30,6 +30,7 @@ public class Doodle {
 			// Decomment the next line when you are ready to start testing biology
 			// theMap.doAllBiology();  // Also clears Move flags
 			// Debugging... System.out.println("After biology...\n"+theMap);
+			theMap.ClearAllMoveF();
 			System.out.print(theMap +"\nTurn "+turns+".  Hit return to continue, q to stop: ");
 		}
 		

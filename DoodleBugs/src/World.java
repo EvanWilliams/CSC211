@@ -199,7 +199,7 @@ public class World {
 		for (int y = 0; y < HEIGHT; y++) {
 			for (int x = 0; x < WIDTH; x++) {
 				if (getCell(x, y) instanceof Ant)
-					((Organism)getCell(x, y)).move();
+					((Organism)getCell(x, y)).move(x, y);
 			}
 		}
 	}

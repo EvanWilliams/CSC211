@@ -1,7 +1,7 @@
 import java.util.Random;
 
 abstract public class Organism extends GridPoint {
-	protected int locX, locY; // Coords of organism in its World.
+	//protected int locX, locY; // Coords of organism in its World.
 	protected boolean hasMoved; // Movement flag: true if has already moved this
 								// turn [Can you see why this is needed?]
 	protected int howLongSinceBreeding; // Number of turns since I last bred
@@ -24,8 +24,9 @@ abstract public class Organism extends GridPoint {
 	public Organism(int x, int y, World g) {
 		// Initialize instance variables, including
 		myMap = g;
-		locX = x;
-		locY = y;
+		generator = new Random();
+//		locX = x;
+//		locY = y;
 		// YOUR CODE HERE!
 	}
 
@@ -48,7 +49,7 @@ abstract public class Organism extends GridPoint {
 	// {return false;}
 	// return true;
 
-	public void move() {
+	public void move(int locX,int locY) {
 
 		{
 			int newLoc = thisRand(4) + 1;
@@ -58,25 +59,29 @@ abstract public class Organism extends GridPoint {
 			// North
 			case 1:
 				if (isCellEmpty(locX, locY + 1)) {
-					locY = locY + 1;
+					myMap.getCells()[locX][locY] = new GridPoint();
+					myMap.getCells()[locX][locY+1] =this;
 				}
 				break;
 			// East
 			case 2:
 				if (isCellEmpty(locX + 1, locY)) {
-					locX = locX + 1;
+					myMap.getCells()[locX][locY] = new GridPoint();
+					myMap.getCells()[locX+1][locY] =this;
 				}
 				break;
 			// South
 			case 3:
 				if (isCellEmpty(locX, locY - 1)) {
-					locY = locY - 1;
+					myMap.getCells()[locX][locY] = new GridPoint();
+					myMap.getCells()[locX][locY-1] =this;
 				}
 				break;
 			// West
 			case 4:
 				if (isCellEmpty(locX - 1, locY)) {
-					locX = locX - 1;
+					myMap.getCells()[locX][locY] = new GridPoint();
+					myMap.getCells()[locX-1][locY] =this;
 				}
 				break;
 			}
@@ -102,7 +107,7 @@ abstract public class Organism extends GridPoint {
 	 * Remove the organism from the world. TODO make kill return a gridpoint not
 	 * null
 	 */
-	public void kill() {
+	public void kill(int locX,int locY) {
 		GridPoint X = new GridPoint();
 		myMap.setCell(locX, locY, X);
 	}
@@ -121,11 +126,12 @@ abstract public class Organism extends GridPoint {
 	 * @param x
 	 * @param y
 	 */
-	public void setLoc(int x, int y) {
-		locX = x;
-		locY = y;
-	}
+//	public void setLoc(int x, int y) {
+//		locX = x;
+//		locY = y;
+//	}
 
+	
 	/**
 	 * @return Return a single character representing the organism. To be used
 	 *         in constructing the printed representation of a World.

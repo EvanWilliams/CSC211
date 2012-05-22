@@ -18,15 +18,17 @@ public class Doodle {
 		
 
 		System.out.println(theMap);
+		System.out.println("Number of ants: " +NUM_ANTS);
+		System.out.println("Number of Doodles "+NUM_DOODLES);
 		System.out.print("Hit return to continue, q to stop: ");
 		
 		while (!scan.nextLine().equals("q")){
 			turns++;
 			theMap.moveAllAnts();
-			// Debugging... System.out.println("After moving ants...\n"+theMap);
+			System.out.println("After moving ants...\n"+theMap);
 			// Decomment the next line when you are ready to test the movement of doodlebugs    
-			// theMap.moveAllDoodles();
-			// Debugging... System.out.println("After moving the doodles...\n"+theMap);
+			 theMap.moveAllDoodles();
+			System.out.println("After moving the doodles...\n"+theMap);
 			// Decomment the next line when you are ready to start testing biology
 			// theMap.doAllBiology();  // Also clears Move flags
 			// Debugging... System.out.println("After biology...\n"+theMap);

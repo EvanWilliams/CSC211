@@ -59,7 +59,9 @@ abstract public class Organism extends GridPoint {
 			{
 			// North
 			case 1:
-				if (isCellEmpty(locX, locY + 1)) {
+				if (locY>Constants.HEIGHT-1)
+					return;
+				if ((isCellEmpty(locX, locY + 1))) {
 					kill(locX,locY);
 					myMap.getCells()[locX][locY+1] = this;
 					setMoveFlag();
@@ -67,6 +69,8 @@ abstract public class Organism extends GridPoint {
 				break;
 			// East
 			case 2:
+				if (locX>Constants.WIDTH-1)
+					return;
 				if (isCellEmpty(locX + 1, locY)) {
 					kill(locX,locY);
 					myMap.getCells()[locX+1][locY] = this;
@@ -75,6 +79,8 @@ abstract public class Organism extends GridPoint {
 				break;
 			// South
 			case 3:
+				if (locY <0)
+					return;
 				if (isCellEmpty(locX, locY - 1)) {
 					kill(locX,locY);
 					myMap.getCells()[locX][locY-1] =this;
@@ -83,6 +89,8 @@ abstract public class Organism extends GridPoint {
 				break;
 			// West
 			case 4:
+				if (locX<0)
+					return;
 				if (isCellEmpty(locX - 1, locY)) {
 					kill(locX,locY);
 					myMap.getCells()[locX-1][locY] =this;
@@ -91,8 +99,25 @@ abstract public class Organism extends GridPoint {
 				break;
 			}
 		}
-
 	
+	public boolean isCellDoodlebug(int xcood, int ycood) {
+		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+			return false;
+		if (myMap.getCells()[xcood][ycood] instanceof Doodlebug) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public boolean isCellAnt(int xcood, int ycood) {
+		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+			return false;
+		if (myMap.getCells()[xcood][ycood] instanceof Ant) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean isCellEmpty(int xcood, int ycood) {
 		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))

@@ -1,6 +1,8 @@
 import java.util.Random;
 
 public class World {
+	int NumAnts = 0;
+	int NumDoodles = 0;
 
 	public GridPoint[][] getCells() {
 		return cells;
@@ -157,7 +159,7 @@ public class World {
 	public String toString() {
 		String result = "";
 		for (int j = 0; j < Constants.HEIGHT; j++) {
-			String strOut = String.format("%2d=", ((j + 1) % 10));
+			String strOut = String.format("%2d=", ((j) % 10));
 			System.out.print(strOut);
 
 			for (int i = 0; i < Constants.WIDTH; i++)
@@ -192,12 +194,16 @@ public class World {
 
 	/**
 	 * Move all the ants.
+	 * @return 
 	 */
-	public void moveAllAnts() {
+	public  void moveAllAnts() {
 		for (int y = 0; y < Constants.HEIGHT; y++) {
 			for (int x = 0; x < Constants.WIDTH; x++) {
 				if (getCell(x, y) instanceof Ant)
-					((Organism)(getCells())[x][y]).move(x, y);
+					{((Organism)(getCells())[x][y]).move(x, y);
+					NumAnts++;}
+				
+					
 			}
 		}
 	}
@@ -209,14 +215,32 @@ public class World {
 					((Organism)getCell(x, y)).clearMoveFlag() ;
 			}
 		}
+		System.out.println("Number of ants: " +NumAnts);
+//		if (NumAnts = 0)
+//			System.out.println("There are no Ants. The Doodles are Victorious!");
+		
+		System.out.println("Number of Doodles "+NumDoodles);
+//		while(NumDoodles = 0)
+//			System.out.println("There are no Doodles. The Ants are Victorious!");
+		NumAnts=0;
+		NumDoodles=0;
 	}
+	
 	/**
 	 * Move all the doodlebugs.
 	 */
 	public void moveAllDoodles() {
-		System.out.println("World.moveAllDoodles() not yet implemented.\n");
-		// YOUR CODE HERE
-	}
+			for (int y = 0; y < Constants.HEIGHT; y++) {
+				for (int x = 0; x < Constants.WIDTH; x++) {
+					if (getCell(x, y) instanceof Doodlebug)
+						{((Organism)(getCells())[x][y]).move(x, y);
+						//secondChance(x,y);
+						NumDoodles++;}
+					
+				}
+			}
+		}
+	
 
 	/**
 	 * Allow each eligible critter to breed, and possibly to starve. Also, clear

@@ -3,7 +3,16 @@ import java.util.Random;
 public class World {
 	private final int HEIGHT = 20;
 	private final int WIDTH = 20;
-	private Organism cells[][]; // (0,0) is considered the upper left corner
+	
+	public GridPoint[][] getCells() {
+		return cells;
+	}
+
+	public void setCells(GridPoint[][] cells) {
+		this.cells = cells;
+	}
+
+	private GridPoint cells[][]; // (0,0) is considered the upper left corner
 	private Random generator; // Use of a Random generator lets us provide same
 //	Ant g = new Ant(0,0);	
 //	Doodlebug newDoodlebug = new Doodlebug(0,0);
@@ -22,7 +31,7 @@ public class World {
 	 * @return If (x,y) are not legal coords, returns null. Else returns value
 	 *         of the that cell. This will either be an Organism or null.
 	 */
-	public Organism getCell(int x, int y) {
+	public GridPoint getCell(int x, int y) {
 		if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 			return null;
 		return cells[y][x];
@@ -36,9 +45,10 @@ public class World {
 	 * @param org
 	 *            Organism to place in the world
 	 */
-	public void setCell(int x, int y, Organism org) {
-		cells[y][x] = org;
+	public void setCell(int x, int y, GridPoint Grid) {
+		cells[y][x] = Grid;
 	}
+	
 
 	/**
 	 * @param x
@@ -85,13 +95,13 @@ public class World {
 		// any long as the seed.
 		generator = new Random(); // With no seed specified, each run will be
 									// different.
-		cells = new Organism[HEIGHT][WIDTH];
+		cells = new GridPoint[HEIGHT][WIDTH];
 		
 		for(int j = 0; j<WIDTH; j++){
-		for(int i = 0; i<HEIGHT; i ++){
-		GridPoint newGridpoint = new GridPoint(i,j);
-		setCell(i, j, newGridpoint);
-		}
+			for(int k = 0; k<HEIGHT; k ++){
+			GridPoint newGridpoint = new GridPoint();
+			setCell(k, j, newGridpoint);
+			}
 		}
 		
 		for (int i = 0; i < x; i++) {
@@ -100,7 +110,7 @@ public class World {
 			int YcoodA = (newLoc % HEIGHT);
 			
 			if (isCellEmpty(XcoodA, YcoodA)) {
-				Ant newAnt = new Ant (XcoodA,YcoodA);
+				Ant newAnt = new Ant (XcoodA,YcoodA,this);
 				setCell(XcoodA, YcoodA, newAnt);
 			}
 			
@@ -112,7 +122,7 @@ public class World {
 			int YcoodA = (newLoc % 20);
 			
 			if (isCellEmpty(XcoodA, YcoodA)) {
-				Doodlebug newDoodlebug = new Doodlebug (XcoodA,YcoodA);
+				Doodlebug newDoodlebug = new Doodlebug (XcoodA,YcoodA,this);
 				setCell(XcoodA, YcoodA, newDoodlebug);
 			}
 		}
@@ -189,7 +199,7 @@ public class World {
 		for (int y = 0; y < HEIGHT; y++) {
 			for (int x = 0; x < WIDTH; x++) {
 				if (getCell(x, y) instanceof Ant)
-					getCell(x, y).move();
+					((Organism)getCell(x, y)).move();
 			}
 		}
 	}
@@ -217,18 +227,18 @@ public class World {
 		// if appropriate.
 	}
 
-	public static void main(String[] args) {
-		World w;
-		w = new World(1, 1);
-		System.out.println("A very thinly populated world:\n" + w);
-		w = new World(0, 0);
-		System.out.println("An empty world:\n" + w);
-		w = new World(10, 10);
-		System.out.println("A thinly populated world:\n" + w);
-		w = new World(30, 10);
-		System.out.println("A populated world:\n" + w);
-		w = new World(10, 10);
-
-	}
+//	public static void main(String[] args) {
+//		World w;
+//		w = new World(1, 1);
+//		System.out.println("A very thinly populated world:\n" + w);
+//		w = new World(0, 0);
+//		System.out.println("An empty world:\n" + w);
+//		w = new World(10, 10);
+//		System.out.println("A thinly populated world:\n" + w);
+//		w = new World(30, 10);
+//		System.out.println("A populated world:\n" + w);
+//		w = new World(10, 10);
+//
+//	}
 
 }

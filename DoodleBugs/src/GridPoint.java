@@ -1,12 +1,29 @@
 
-public class GridPoint extends Organism{
+public class GridPoint {
 	
-	public GridPoint(int x, int y) {
-		super(x,y);
+	protected char type;
+	
+	
+	public GridPoint() {
+		type = ' ';
+	}
+	
+	public boolean isEmpty(){
+		if(type==' ')
+			return true;
+		return false;
+	}
+
+	public char getType() {
+		return type;
+	}
+
+	public void setType(char type) {
+		this.type = type;
 	}
 
 	public String toString() {
-		return " "; 
+		return ""+type; 
 		}
 	//@Override
 	//public void move() {

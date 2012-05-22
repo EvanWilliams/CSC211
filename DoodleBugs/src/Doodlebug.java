@@ -6,9 +6,9 @@ public class Doodlebug extends Organism {
 	private final int EATING_LIMIT = 3; // Doodles gotta eat every this many turns
 	private int turnsSinceEating;		// Number of turns since the doodlebug last ate.
 	
-	public Doodlebug(int x, int y) {
-		super(x,y);
-		// YOUR CODE HERE!
+	public Doodlebug(int x, int y,World g) {
+		super(x,y,g);
+		type = 'D';
 	}
 	
 	/* Check to see if the doodlebug should starve.  If not, check to see if the doodlebug
@@ -66,9 +66,9 @@ public class Doodlebug extends Organism {
 	* digit equal to the number of turns since it had last eaten, you'll want
 	* to modify either this method or (more likely) singleCharRepresenting.]
 	*/
-	public String toString() {
-		return "D"; 
-		}
+//	public String toString() {
+//		return "D"; 
+//		}
 
 	public String singleCharRepresenting() {
 		return "D";

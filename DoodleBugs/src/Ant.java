@@ -3,8 +3,10 @@ public class Ant extends Organism {
 
 	private final int BREEDING_FREQ = 3;
 
-	public Ant(int x, int y) {
-		super(x,y);
+	public Ant(int x, int y,World g) {
+		super(x,y,g);
+		type = 'a';
+		
 	}
 	
 	/* Ants may breed, but never starve.
@@ -21,10 +23,10 @@ public class Ant extends Organism {
 	  	moveToEmpty();
 	}
 	
-	public String toString() {
-		String result="a";
-		return result;
-	}
+//	public String toString() {
+//		String result="a";
+//		return result;
+//	}
 	
 	public String singleCharRepresenting() {
 		return "a";

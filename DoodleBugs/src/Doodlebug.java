@@ -30,89 +30,15 @@ public class Doodlebug extends Organism {
 //		}
 //	}
 	public void move(int x, int y) {
-
+		
 		if(hasMoved())
 			return;
-		while(numTrys!=2){
-		int newLoc = thisRand(4) + 1;
-		switch (newLoc)
-
-		{
-		// North
-		case 1:
-			if (y+1>Constants.HEIGHT-1)
-				return;
-			if(isCellAnt(x, y + 1)) {
-				kill(x,y);
-				myMap.getCells()[x][y+1] = this;
-				setMoveFlag();
-			}
-			if(isCellEmpty(x, y + 1)){
-				numTrys++;
-
-				if (numTrys!=1)
-					kill(x,y);
-				myMap.getCells()[x][y+1] = this;
-				setMoveFlag();
-			}
-			break;
-			// East
-		case 2:
-			if (x+1>Constants.WIDTH-1)
-				return;
-			if ((isCellEmpty(x+1, y))||(isCellAnt(x+1, y))) {
-				kill(x,y);
-				myMap.getCells()[x+1][y] = this;
-				setMoveFlag();
-			}
-			if(isCellEmpty(x, y + 1)){
-				numTrys++;
-
-				if (numTrys!=1)
-					kill(x,y);
-				myMap.getCells()[x][y+1] = this;
-				setMoveFlag();
-			}
-			break;
-			// South
-		case 3:
-			if (y-1 <0)
-				return;
-			if ((isCellEmpty(x, y - 1))||(isCellAnt(x, y - 1))) {
-				kill(x,y);
-				myMap.getCells()[x][y-1] =this;
-				setMoveFlag();
-			}
-			if(isCellEmpty(x, y + 1)){
-				numTrys++;
-
-				if (numTrys!=1)
-					kill(x,y);
-				myMap.getCells()[x][y+1] = this;
-				setMoveFlag();
-			}
-			break;
-			// West
-		case 4:
-			if (x-1 <0)
-				return;
-			if ((isCellEmpty(x-1, y))||(isCellAnt(x-1, y))) {
-				kill(x,y);
-				myMap.getCells()[x-1][y] =this;
-				setMoveFlag();
-			}
-			if(isCellEmpty(x, y + 1)){
-				numTrys++;
-
-				if (numTrys!=1)
-					kill(x,y);
-				myMap.getCells()[x][y+1] = this;
-				setMoveFlag();
-			}
-			break;
+		if(isAntAdjacent(x,y))
+			return;
+		
+		super.move(x,y);
 		}
-		}
-	}
+	
 
 
 
@@ -143,9 +69,29 @@ private boolean moveToEatIfPossible() {
  * out if you can't see how you might want to use a method like this.   My own implementation of
  * move() used it, but yours might not!
  */
-private boolean moveToAntIfAdjacent(int x, int y) {
-	// YOUR CODE HERE (if you decide to implement this method)!
-	return true; // MODIFY SO DOESN'T ALWAYS RETURN TRUE
+private boolean isAntAdjacent(int x, int y) {
+	if ((myMap.isCellAnt(x, y + 1))){
+		kill(x,y);
+		myMap.getCells()[x][y+1] = this;
+		setMoveFlag();
+	}
+	if ((myMap.isCellAnt(x, y - 1))){
+		kill(x,y);
+		myMap.getCells()[x][y-1] = this;
+		setMoveFlag();
+	}
+	if ((myMap.isCellAnt(x+1, y))){
+		kill(x,y);
+		myMap.getCells()[x+1][y] = this;
+		setMoveFlag();
+	}
+	if ((myMap.isCellAnt(x-1, y))){
+		kill(x,y);
+		myMap.getCells()[x-1][y] = this;
+		setMoveFlag();
+	}
+		
+	return hasMoved(); // MODIFY SO DOESN'T ALWAYS RETURN TRUE
 }
 
 /**

@@ -149,6 +149,28 @@ public class World {
 		{return false;}
 		return true;
 	}
+	
+	
+	
+	public boolean isCellDoodlebug(int xcood, int ycood) {
+		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+			return false;
+		if (cells[xcood][ycood] instanceof Doodlebug) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	public boolean isCellAnt(int xcood, int ycood) {
+		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+			return false;
+		if (cells[xcood][ycood] instanceof Ant) {
+			return true;
+		}
+		return false;
+	}
 
 	/*
 	 * @return Return printed representation of the World's grid. Print this to

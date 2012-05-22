@@ -99,26 +99,6 @@ abstract public class Organism extends GridPoint {
 				break;
 			}
 		}
-	
-	public boolean isCellDoodlebug(int xcood, int ycood) {
-		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
-			return false;
-		if (myMap.getCells()[xcood][ycood] instanceof Doodlebug) {
-			return true;
-		}
-		return false;
-	}
-	
-	
-	public boolean isCellAnt(int xcood, int ycood) {
-		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
-			return false;
-		if (myMap.getCells()[xcood][ycood] instanceof Ant) {
-			return true;
-		}
-		return false;
-	}
-
 	public boolean isCellEmpty(int xcood, int ycood) {
 		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
 			return false;

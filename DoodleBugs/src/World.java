@@ -14,13 +14,13 @@ public class World {
 
 	private GridPoint cells[][]; // (0,0) is considered the upper left corner
 	private Random generator; // Use of a Random generator lets us provide same
-//	Ant g = new Ant(0,0);	
-//	Doodlebug newDoodlebug = new Doodlebug(0,0);
-								// sequence of "random" numbers. Consequently,
-								// the
-								// simulation will be identical each run, aiding
-								// debugging.
-								// See the World() constructor.
+	// Ant g = new Ant(0,0);
+	// Doodlebug newDoodlebug = new Doodlebug(0,0);
+	// sequence of "random" numbers. Consequently,
+	// the
+	// simulation will be identical each run, aiding
+	// debugging.
+	// See the World() constructor.
 
 	/**
 	 * @param x
@@ -36,8 +36,7 @@ public class World {
 			return null;
 		return cells[x][y];
 	}
-	
-	
+
 	/**
 	 * @param x
 	 *            horizontal grid coordinate
@@ -49,7 +48,6 @@ public class World {
 	public void setCell(int x, int y, GridPoint Grid) {
 		cells[x][y] = Grid;
 	}
-	
 
 	/**
 	 * @param x
@@ -59,11 +57,11 @@ public class World {
 	 * @return Return false if cell at given coords is not empty, or if
 	 *         coordinates are "off the grid." Else return true.
 	 */
-//	public boolean isEmptyCell(int x, int y) {
-//		if(cells[x][y] != null)
-//		{return false;}
-//		else return true;
-//	}
+	// public boolean isEmptyCell(int x, int y) {
+	// if(cells[x][y] != null)
+	// {return false;}
+	// else return true;
+	// }
 
 	/**
 	 * @param x
@@ -83,47 +81,48 @@ public class World {
 	 * want each to be unique), remove the "seed" value from the Random()
 	 * constructor.
 	 * 
+	 * 
 	 * @param numAnts
 	 *            The number of Ants to place randomly in the grid.
 	 * @param numDoodles
-	 *            The number of Doodlebuggs to place randomly in the grid.
+	 *            The number of Doodlebugs to place randomly in the grid.
 	 */
 	public World(int numAnts, int numDoodles) {
-		 int noA = numAnts;
-		 int noD = numDoodles;
+		int noA = numAnts;
+		int noD = numDoodles;
 		// [Exactly one of the next two lines should be commented out...]
 		// generator = new Random(1000L); // Each run will be the same. Can use
 		// any long as the seed.
 		generator = new Random(); // With no seed specified, each run will be
-									// different.
+		// different.
 		cells = new GridPoint[Constants.WIDTH][Constants.HEIGHT];
-		
-		for(int j = 0; j<Constants.WIDTH; j++){
-			for(int k = 0; k<Constants.HEIGHT; k ++){
-			GridPoint newGridpoint = new GridPoint();
-			setCell(j, k, newGridpoint);
+
+		for (int j = 0; j < Constants.WIDTH; j++) {
+			for (int k = 0; k < Constants.HEIGHT; k++) {
+				GridPoint newGridpoint = new GridPoint();
+				setCell(j, k, newGridpoint);
 			}
 		}
-		
+
 		for (int i = 0; i < noA; i++) {
 			int newLoc = myRand(400);
 			int XcoodA = (newLoc / Constants.WIDTH);
 			int YcoodA = (newLoc % Constants.HEIGHT);
-			
+
 			if (isCellEmpty(XcoodA, YcoodA)) {
-				Ant newAnt = new Ant (XcoodA,YcoodA,this);
+				Ant newAnt = new Ant(XcoodA, YcoodA, this);
 				setCell(XcoodA, YcoodA, newAnt);
 			}
-			
+
 		}
-		
-		for(int i = 0; i < noD; i++){
+
+		for (int i = 0; i < noD; i++) {
 			int newLoc = myRand(400);
 			int XcoodA = (newLoc / 20);
 			int YcoodA = (newLoc % 20);
-			
+
 			if (isCellEmpty(XcoodA, YcoodA)) {
-				Doodlebug newDoodlebug = new Doodlebug (XcoodA,YcoodA,this);
+				Doodlebug newDoodlebug = new Doodlebug(XcoodA, YcoodA, this);
 				setCell(XcoodA, YcoodA, newDoodlebug);
 			}
 		}
@@ -131,41 +130,44 @@ public class World {
 
 	}
 
-		
-//	public Ant fillAnts(int x) {
-//		for(int i =0; i<x;i++){
-//			Ant newAnt = new Ant(Xcood,Ycood);
-//			return newAnt;
-//		}
-//	
-//		}
-//    public Organism getcells(cells[])
-//    {
-//    	Ncells][] = cells[]
-//		return g;
-//   
-//    }
+	// public Ant fillAnts(int x) {
+	// for(int i =0; i<x;i++){
+	// Ant newAnt = new Ant(Xcood,Ycood);
+	// return newAnt;
+	// }
+	//
+	// }
+	// public Organism getcells(cells[])
+	// {
+	// Ncells][] = cells[]
+	// return g;
+	//
+	// }
 	public boolean isCellEmpty(int xcood, int ycood) {
-		if(cells[xcood][ycood] instanceof Ant || cells[xcood][ycood] instanceof Doodlebug )
-		{return false;}
+		if(xcood>Constants.WIDTH-1||xcood<0)
+			return false;
+		if(ycood>Constants.HEIGHT-1||ycood<0)
+			return false;
+		if (cells[xcood][ycood] instanceof Ant
+				|| cells[xcood][ycood] instanceof Doodlebug) {
+			return false;
+		}
 		return true;
 	}
-	
-	
-	
+
 	public boolean isCellDoodlebug(int xcood, int ycood) {
-		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+		if ((xcood < 0 || xcood > Constants.WIDTH - 1)
+				|| (ycood < 0 || ycood > Constants.HEIGHT - 1))
 			return false;
 		if (cells[xcood][ycood] instanceof Doodlebug) {
 			return true;
 		}
 		return false;
 	}
-	
-	
-	
+
 	public boolean isCellAnt(int xcood, int ycood) {
-		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+		if ((xcood < 0 || xcood > Constants.WIDTH - 1)
+				|| (ycood < 0 || ycood > Constants.HEIGHT - 1))
 			return false;
 		if (cells[xcood][ycood] instanceof Ant) {
 			return true;
@@ -217,66 +219,67 @@ public class World {
 
 	/**
 	 * Move all the ants.
-	 * @return 
+	 * 
+	 * @return
 	 */
-	public  void moveAllAnts() {
+	public void moveAllAnts() {
 		for (int y = 0; y < Constants.HEIGHT; y++) {
 			for (int x = 0; x < Constants.WIDTH; x++) {
-				if (getCell(x, y) instanceof Ant)
-					{((Organism)(getCells())[x][y]).move(x, y);
-					}
-				
-					
+				if (getCell(x, y) instanceof Ant) {
+					((Organism) (getCells())[x][y]).move(x, y);
+				}
+
 			}
 		}
 	}
 
-	public void countAllOrganisms(){
+	public void countAllOrganisms() {
 		NumDoodles = 0;
 		NumAnts = 0;
-		
+
 		for (int y = 0; y < Constants.HEIGHT; y++) {
 			for (int x = 0; x < Constants.WIDTH; x++) {
 				if (getCell(x, y) instanceof Doodlebug)
 					NumDoodles++;
 				else if (getCell(x, y) instanceof Ant)
 					NumAnts++;
-					//secondChance(x,y);
-	}
+				// secondChance(x,y);
+			}
 		}
 	}
-	
+
 	public void ClearAllMoveF() {
 		for (int y = 0; y < Constants.HEIGHT; y++) {
 			for (int x = 0; x < Constants.WIDTH; x++) {
 				if (getCell(x, y) instanceof Organism)
-					((Organism)getCell(x, y)).clearMoveFlag() ;
+					((Organism) getCell(x, y)).clearMoveFlag();
 			}
 		}
-		System.out.println("Number of ants: " +NumAnts);
-//		if (NumAnts = 0)
-//			System.out.println("There are no Ants. The Doodles are Victorious!");
-		
-		System.out.println("Number of Doodles "+NumDoodles);
-//		while(NumDoodles = 0)
-//			System.out.println("There are no Doodles. The Ants are Victorious!");
+		System.out.println("Number of ants: " + NumAnts);
+		// if (NumAnts = 0)
+		// System.out.println("There are no Ants. The Doodles are Victorious!");
+
+		System.out.println("Number of Doodles " + NumDoodles);
+		// while(NumDoodles = 0)
+		// System.out.println("There are no Doodles. The Ants are Victorious!");
 	}
-	
+
 	/**
 	 * Move all the doodlebugs.
 	 */
 	public void moveAllDoodles() {
-			for (int y = 0; y < Constants.HEIGHT; y++) {
-				for (int x = 0; x < Constants.WIDTH; x++) {
-					if (getCell(x, y) instanceof Doodlebug)
-						{((Organism)(getCells())[x][y]).move(x, y);
-						//secondChance(x,y);
-						NumDoodles++;}
-					
+		for (int y = 0; y < Constants.HEIGHT; y++) {
+			for (int x = 0; x < Constants.WIDTH; x++) {
+				if (getCell(x, y) instanceof Doodlebug) {
+					((Organism) (getCells())[x][y]).move(x, y);
+					// secondChance(x,y);
+					NumDoodles++;
 				}
+
 			}
 		}
-	
+	}
+
 
 	/**
 	 * Allow each eligible critter to breed, and possibly to starve. Also, clear
@@ -287,24 +290,26 @@ public class World {
 	 * iteration continues).
 	 */
 	public void doAllBiology() {
-		System.out.println("World.doAllBiology() not yet implemented.\n");
-		// YOUR CODE HERE. Iterate over the cells, clearing movement flags and
-		// breeding,
-		// if appropriate.
+		for(int y = 0; y < Constants.HEIGHT; y++) {
+			for (int x = 0; x < Constants.WIDTH; x++) {
+				if (getCell(x, y) instanceof Organism)
+					((Organism)getCell(x, y)).doBiology(x,y);
+			}
+
+			// public static void main(String[] args) {
+			// World w;
+			// w = new World(1, 1);
+			// System.out.println("A very thinly populated world:\n" + w);
+			// w = new World(0, 0);
+			// System.out.println("An empty world:\n" + w);
+			// w = new World(10, 10);
+			// System.out.println("A thinly populated world:\n" + w);
+			// w = new World(30, 10);
+			// System.out.println("A populated world:\n" + w);
+			// w = new World(10, 10);
+			//
+			// }
+
+		}
 	}
-
-//	public static void main(String[] args) {
-//		World w;
-//		w = new World(1, 1);
-//		System.out.println("A very thinly populated world:\n" + w);
-//		w = new World(0, 0);
-//		System.out.println("An empty world:\n" + w);
-//		w = new World(10, 10);
-//		System.out.println("A thinly populated world:\n" + w);
-//		w = new World(30, 10);
-//		System.out.println("A populated world:\n" + w);
-//		w = new World(10, 10);
-//
-//	}
-
 }

@@ -1,29 +1,29 @@
 
 public class GridPoint {
 	
-	protected char type;
+	protected String type;
 	
 	
 	public GridPoint() {
-		type = ' ';
+		type = " ";
 	}
 	
 	public boolean isEmpty(){
-		if(type==' ')
+		if(type==" ")
 			return true;
 		return false;
 	}
 
-	public char getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(char type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
 	public String toString() {
-		return ""+type; 
+		return " "+type; 
 		}
 	//@Override
 	//public void move() {

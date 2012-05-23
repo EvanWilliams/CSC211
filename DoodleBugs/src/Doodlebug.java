@@ -3,20 +3,57 @@ public class Doodlebug extends Organism {
 
 	private final int BREEDING_FREQ= 7;  // Doodlebugs can breed if they have lived at 
 	// least this many turns since last breeding.
-	private final int EATING_LIMIT = 3; // Doodles gotta eat every this many turns
-	private int turnsSinceEating;		// Number of turns since the doodlebug last ate.
+	private final int DEATHLIMIT=3;
+	private int DeathTimer; // Doodles gotta eat every this many turns
+		// Number of turns since the doodlebug last ate.
 	int numTrys = 0;
+
+	
 	public Doodlebug(int x, int y,World g) {
 		super(x,y,g);
-		type = 'D';
+		DeathTimer = DEATHLIMIT;
+		type = "D";
+		
 	}
 
 	/* Check to see if the doodlebug should starve.  If not, check to see if the doodlebug
 	 * might procreate.
 	 * @see Organism#doBiology()
 	 */
-	public void doBiology() {
-		// YOUR CODE HERE!
+private void isEmptyAdjacent(int x, int y) {
+		
+		if ((myMap.isCellEmpty(x, y + 1))){
+			Doodlebug newDoodlebug = new Doodlebug(x, y+1, myMap);
+			myMap.setCell(x, y+1, newDoodlebug);
+			timeSinceBreeding=0;
+			setMoveFlag();
+		}
+		else if ((myMap.isCellEmpty(x, y - 1))){
+			Doodlebug newDoodlebug = new Doodlebug(x, y-1, myMap);
+			myMap.setCell(x, y-1, newDoodlebug);
+			timeSinceBreeding=0;
+			setMoveFlag();
+		}
+		else if ((myMap.isCellEmpty(x+1, y))){
+			Doodlebug newDoodlebug = new Doodlebug(x+1, y, myMap);
+			myMap.setCell(x+1, y, newDoodlebug);
+			timeSinceBreeding=0;
+			setMoveFlag();
+		}
+		else if ((myMap.isCellEmpty(x-1, y))){
+			Doodlebug newDoodlebug = new Doodlebug(x-1, y, myMap);
+			myMap.setCell(x-1, y, newDoodlebug);
+			timeSinceBreeding=0;
+			setMoveFlag();
+		}
+		
+	}
+	public void doBiology(int x,int y) {
+		timeSinceBreeding++;
+		if(DeathTimer==0)
+			kill(x,y);
+		if(timeSinceBreeding>BREEDING_FREQ)
+			isEmptyAdjacent(x,y);
 	}
 
 	/* If there is an adjacent ant, move to it, consuming it.  Else, possibly move to 
@@ -35,8 +72,10 @@ public class Doodlebug extends Organism {
 			return;
 		if(isAntAdjacent(x,y))
 			return;
-		
+		else{ 
 		super.move(x,y);
+		DeathTimer--;
+		}
 		}
 	
 
@@ -51,12 +90,6 @@ public class Doodlebug extends Organism {
  * ways of solving the problem.
  * 
  */
-private boolean moveToEatIfPossible() {
-	// generate random number (2)
-	// YOUR CODE HERE!
-	return true; // MODIFY SO DOESN'T ALWAYS RETURN TRUE
-}
-
 /**
  * @param x  coordinates of spot to examine
  * @param y
@@ -74,21 +107,25 @@ private boolean isAntAdjacent(int x, int y) {
 		kill(x,y);
 		myMap.getCells()[x][y+1] = this;
 		setMoveFlag();
+		DeathTimer=DEATHLIMIT;
 	}
 	if ((myMap.isCellAnt(x, y - 1))){
 		kill(x,y);
 		myMap.getCells()[x][y-1] = this;
 		setMoveFlag();
+		DeathTimer=DEATHLIMIT;
 	}
 	if ((myMap.isCellAnt(x+1, y))){
 		kill(x,y);
 		myMap.getCells()[x+1][y] = this;
 		setMoveFlag();
+		DeathTimer=DEATHLIMIT;
 	}
 	if ((myMap.isCellAnt(x-1, y))){
 		kill(x,y);
 		myMap.getCells()[x-1][y] = this;
 		setMoveFlag();
+		DeathTimer=DEATHLIMIT;
 	}
 		
 	return hasMoved(); // MODIFY SO DOESN'T ALWAYS RETURN TRUE
@@ -100,9 +137,12 @@ private boolean isAntAdjacent(int x, int y) {
  * digit equal to the number of turns since it had last eaten, you'll want
  * to modify either this method or (more likely) singleCharRepresenting.]
  */
-//	public String toString() {
-//		return "D"; 
-//		}
+public String toString() {
+	if(DeathTimer==3)
+		return " "+type;
+	else 
+		return " "+DeathTimer;
+	}
 
 public String singleCharRepresenting() {
 	return "D";

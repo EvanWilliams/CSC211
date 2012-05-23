@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Doodle {
 
-	private static final int NUM_ANTS = 10; //Increase to a bigger number when testing biology
-	private static final int NUM_DOODLES = 5;
+	private static final int NUM_ANTS = 12; //Increase to a bigger number when testing biology
+	private static final int NUM_DOODLES = 7;
 	/**
 	 * @param args
 	 * 
@@ -25,16 +25,18 @@ public class Doodle {
 		while (!scan.nextLine().equals("q")){
 			turns++;
 			theMap.moveAllAnts();
-			System.out.println("After moving ants...\n"+theMap);
+//			System.out.println("After moving ants...\n"+theMap);
 			// Decomment the next line when you are ready to test the movement of doodlebugs    
 			theMap.moveAllDoodles();
-			System.out.println("After moving the doodles...\n"+theMap);
+//			System.out.println("After moving the doodles...\n"+theMap);
 			theMap.countAllOrganisms();
 			// Decomment the next line when you are ready to start testing biology
-			// theMap.doAllBiology();  // Also clears Move flags
+			 theMap.doAllBiology();  // Also clears Move flags
 			// Debugging... System.out.println("After biology...\n"+theMap);
 			theMap.ClearAllMoveF();
 			System.out.print(theMap +"\nTurn "+turns+".  Hit return to continue, q to stop: ");
+			System.out.println();
+			System.out.println("----------------------------------------");
 		}
 		
 	}

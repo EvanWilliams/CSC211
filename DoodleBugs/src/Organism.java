@@ -5,11 +5,10 @@ abstract public class Organism extends GridPoint {
 	protected boolean hasMoved; // Movement flag: true if has already moved this
 								// turn [Can you see why this is needed?]
 	protected int howLongSinceBreeding; // Number of turns since I last bred
-
-	abstract public void doBiology(); // Breeding and dying
-
+	abstract public void doBiology(int x,int y);
 	protected World myMap; // Need this so each organism has access to its
 							// World.
+	protected int timeSinceBreeding;
 	private Random generator;
 
 	/**
@@ -25,7 +24,8 @@ abstract public class Organism extends GridPoint {
 		// Initialize instance variables, including
 		myMap = g;
 		generator = new Random();
-//		locX = x;
+		timeSinceBreeding = 1;
+//		locX = x ;
 //		locY = y;
 		// YOUR CODE HERE!
 	}
@@ -43,11 +43,6 @@ abstract public class Organism extends GridPoint {
 
 	}
 
-	// public boolean isCellEmpty(int xcood, int ycood) {
-	// if(cells[xcood][ycood] instanceof Ant || cells[xcood][ycood] instanceof
-	// Doodlebug )
-	// {return false;}
-	// return true;
 
 	public void move(int locX,int locY) {
 
@@ -139,24 +134,4 @@ abstract public class Organism extends GridPoint {
 		// YOUR CODE HERE!
 	}
 
-	/**
-	 * Set the location of the organism to the given coordinates.
-	 * 
-	 * @param x
-	 * @param y
-	 */
-//	public void setLoc(int x, int y) {
-//		locX = x;
-//		locY = y;
-//	}
-
-	
-	/**
-	 * @return Return a single character representing the organism. To be used
-	 *         in constructing the printed representation of a World.
-	 */
-//	public String toString() {
-//		String result = "X";
-//		return result;
-//	}
 }

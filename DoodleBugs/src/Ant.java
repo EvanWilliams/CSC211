@@ -9,11 +9,14 @@ public class Ant extends Organism {
 	}
 
 	/**
-	 * This is the Breeding method for ants
-	 * Because it seemed unduly complicated to make the spawning location random
-	 * The breeding method tries North first then South then East, and finally West
-	 * @param x = X Location of Organism
-	 * @param y = Y Location of Organism
+	 * This is the Breeding method for ants Because it seemed unduly complicated
+	 * to make the spawning location random The breeding method tries North
+	 * first then South then East, and finally West
+	 * 
+	 * @param x
+	 *            = X Location of Organism
+	 * @param y
+	 *            = Y Location of Organism
 	 */
 	private void isEmptyAdjacent(int x, int y) {
 
@@ -53,15 +56,6 @@ public class Ant extends Organism {
 			isEmptyAdjacent(x, y);
 
 	}
-
-	/*
-	 * Ants try to move to an adjacent empty square.
-	 * 
-	 * @see Organism#move()
-	 */
-	// public void move() {
-	// moveToEmpty();
-	// }
 
 	public String toString() {
 		String result = " a";

@@ -4,7 +4,7 @@ public class Doodlebug extends Organism {
 	// lived at
 	// least this many turns since last breeding.
 	private final int DEATHLIMIT = 3;// Doodlebugs have to eat every this many
-										// turns
+	// turns
 	private int DeathTimer; // Number of turns since the Doodlebugs last ate.
 	int numTrys = 0;
 
@@ -62,7 +62,7 @@ public class Doodlebug extends Organism {
 	 */
 	public void doBiology(int x, int y) {
 		timeSinceBreeding++;
-		if (DeathTimer<1)
+		if (DeathTimer < 1)
 			kill(x, y);
 		if (timeSinceBreeding > BREEDING_FREQ)
 			isEmptyAdjacent(x, y);

@@ -12,13 +12,15 @@ public class World {
 	public void setCells(GridPoint[][] cells) {
 		this.cells = cells;
 	}
+
 	public int getNumAnts() {
 		return NumAnts;
 	}
-	
+
 	public int getNumDoodles() {
 		return NumDoodles;
 	}
+
 	private GridPoint cells[][]; // (0,0) is considered the upper left corner
 	private Random generator; // Use of a Random generator lets us provide same
 
@@ -34,14 +36,24 @@ public class World {
 
 	public int myRand(int x) {
 
-
 		return generator.nextInt(x);
 
 	}
+
+	/**
+	 * @param numAnts
+	 *            = Number of Ants to be Generated randomly and placed in the
+	 *            World
+	 * @param numDoodles
+	 *            = Number of Doodles to be Generated randomly and placed in the
+	 *            World This Method uses a random generator from 0-399 and
+	 *            determines a point on the World Array based on the number
+	 *            produced and creates Ants or Doodles in that point
+	 */
 	public World(int numAnts, int numDoodles) {
 		int noA = numAnts;
 		int noD = numDoodles;
-		generator = new Random(); 
+		generator = new Random();
 		cells = new GridPoint[Constants.WIDTH][Constants.HEIGHT];
 
 		for (int j = 0; j < Constants.WIDTH; j++) {
@@ -73,9 +85,16 @@ public class World {
 				setCell(XcoodA, YcoodA, newDoodlebug);
 			}
 		}
-	
 
 	}
+
+	/**
+	 * @param x
+	 *            = X Location of Organism
+	 * @param y
+	 *            = Y Location of Organism
+	 * @returns true if cell is a Gridpoint or else returns false
+	 */
 	public boolean isCellEmpty(int xcood, int ycood) {
 		if (xcood > Constants.WIDTH - 1 || xcood < 0)
 			return false;
@@ -88,6 +107,13 @@ public class World {
 		return true;
 	}
 
+	/**
+	 * @param x
+	 *            = X Location of Organism
+	 * @param y
+	 *            = Y Location of Organism
+	 * @returns true if cells is an instance of Doodlebug or else returns false
+	 */
 	public boolean isCellDoodlebug(int xcood, int ycood) {
 		if ((xcood < 0 || xcood > Constants.WIDTH - 1)
 				|| (ycood < 0 || ycood > Constants.HEIGHT - 1))
@@ -98,6 +124,13 @@ public class World {
 		return false;
 	}
 
+	/**
+	 * @param x
+	 *            = X Location of Organism
+	 * @param y
+	 *            = Y Location of Organism
+	 * @returns true if cell is an instance of ant or else returns false
+	 */
 	public boolean isCellAnt(int xcood, int ycood) {
 		if ((xcood < 0 || xcood > Constants.WIDTH - 1)
 				|| (ycood < 0 || ycood > Constants.HEIGHT - 1))
@@ -124,30 +157,8 @@ public class World {
 				System.out.print(cells[i][j]);
 			System.out.println();
 		}
-		// YOUR CODE HERE to build result to be a printed representation of the
-		// world.
-		// You'll want to make use of singleCharRepresenting() via polymorphism.
-		return result;
-	}
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param org
-	 * @return Return true if a new organism was added to the World, else return
-	 *         false. If at least one of the adjacent cells to [x,y] is empty,
-	 *         randomly select one of the empty ones and place org there. [You
-	 *         might do this by first checking if there's at least one empty
-	 *         adjacent cell. If so, use a loop to successively randomly select
-	 *         an adjacent cell until you find an empty one, then place org
-	 *         there.]
-	 * 
-	 *         [Oh, and this might be a good place to use a "switch" statement
-	 *         to deal with the four possible directions N,S,E,W.]
-	 */
-	public boolean addAdjacent(int x, int y, Organism org) {
-		// YOUR CODE HERE....
-		return true; // MODIFY SO RETURNS TRUE ONLY WHEN APPROPRIATE
+		return result;
 	}
 
 	/**
@@ -166,6 +177,9 @@ public class World {
 		}
 	}
 
+	/**
+	 * Scans thru the Array and counts all Organisms
+	 */
 	public void countAllOrganisms() {
 		NumDoodles = 0;
 		NumAnts = 0;
@@ -181,6 +195,9 @@ public class World {
 		}
 	}
 
+	/**
+	 * Clear all Move Flags
+	 */
 	public void ClearAllMoveF() {
 		for (int y = 0; y < Constants.HEIGHT; y++) {
 			for (int x = 0; x < Constants.WIDTH; x++) {
@@ -188,7 +205,7 @@ public class World {
 					((Organism) getCell(x, y)).clearMoveFlag();
 			}
 		}
-		
+
 	}
 
 	/**

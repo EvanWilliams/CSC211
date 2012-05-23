@@ -1,13 +1,10 @@
 import java.util.Random;
 
 abstract public class Organism extends GridPoint {
-	//protected int locX, locY; // Coords of organism in its World.
-	protected boolean hasMoved; // Movement flag: true if has already moved this
-								// turn [Can you see why this is needed?]
-	protected int howLongSinceBreeding; // Number of turns since I last bred
-	abstract public void doBiology(int x,int y);
-	protected World myMap; // Need this so each organism has access to its
-							// World.
+	protected boolean hasMoved; 
+	protected int howLongSinceBreeding; 
+	abstract public void doBiology(int x, int y);
+	protected World myMap; 
 	protected int timeSinceBreeding;
 	private Random generator;
 
@@ -18,16 +15,13 @@ abstract public class Organism extends GridPoint {
 	 * 
 	 * @param x
 	 * @param y
-	 * @param m
+	 * @param g
 	 */
 	public Organism(int x, int y, World g) {
-		// Initialize instance variables, including
 		myMap = g;
 		generator = new Random();
 		timeSinceBreeding = 1;
-//		locX = x ;
-//		locY = y;
-		// YOUR CODE HERE!
+		
 	}
 
 	/**
@@ -43,59 +37,67 @@ abstract public class Organism extends GridPoint {
 
 	}
 
+	public void move(int locX, int locY) {
 
-	public void move(int locX,int locY) {
+		if (hasMoved())
+			return;
+		int newLoc = thisRand(4) + 1;
+		switch (newLoc)
 
-		if(hasMoved())
-			return;	
-			int newLoc = thisRand(4) + 1;
-			switch (newLoc)
-
-			{
-			// North
-			case 1:
-				if (locY>Constants.HEIGHT-1)
-					return;
-				if ((isCellEmpty(locX, locY + 1))) {
-					kill(locX,locY);
-					myMap.getCells()[locX][locY+1] = this;
-					setMoveFlag();
-				}
-				break;
-			// East
-			case 2:
-				if (locX>Constants.WIDTH-1)
-					return;
-				if (isCellEmpty(locX + 1, locY)) {
-					kill(locX,locY);
-					myMap.getCells()[locX+1][locY] = this;
-					setMoveFlag();
-				}
-				break;
-			// South
-			case 3:
-				if (locY <0)
-					return;
-				if (isCellEmpty(locX, locY - 1)) {
-					kill(locX,locY);
-					myMap.getCells()[locX][locY-1] =this;
-					setMoveFlag();
-				}
-				break;
-			// West
-			case 4:
-				if (locX<0)
-					return;
-				if (isCellEmpty(locX - 1, locY)) {
-					kill(locX,locY);
-					myMap.getCells()[locX-1][locY] =this;
-					setMoveFlag();
-				}
-				break;
+		{
+		// North
+		case 1:
+			if (locY > Constants.HEIGHT - 1)
+				return;
+			if ((isCellEmpty(locX, locY + 1))) {
+				kill(locX, locY);
+				myMap.getCells()[locX][locY + 1] = this;
+				setMoveFlag();
 			}
+			break;
+		// East
+		case 2:
+			if (locX > Constants.WIDTH - 1)
+				return;
+			if (isCellEmpty(locX + 1, locY)) {
+				kill(locX, locY);
+				myMap.getCells()[locX + 1][locY] = this;
+				setMoveFlag();
+			}
+			break;
+		// South
+		case 3:
+			if (locY < 0)
+				return;
+			if (isCellEmpty(locX, locY - 1)) {
+				kill(locX, locY);
+				myMap.getCells()[locX][locY - 1] = this;
+				setMoveFlag();
+			}
+			break;
+		// West
+		case 4:
+			if (locX < 0)
+				return;
+			if (isCellEmpty(locX - 1, locY)) {
+				kill(locX, locY);
+				myMap.getCells()[locX - 1][locY] = this;
+				setMoveFlag();
+			}
+			break;
 		}
+	}
+
+	/**
+	* @param
+	*          = X Location of Organism
+	* @param y
+	*            = Y Location of Organism
+	* @return
+	*/
 	public boolean isCellEmpty(int xcood, int ycood) {
-		if ((xcood<0 || xcood>Constants.WIDTH-1)||(ycood<0 || ycood>Constants.HEIGHT-1))
+		if ((xcood < 0 || xcood > Constants.WIDTH - 1)
+				|| (ycood < 0 || ycood > Constants.HEIGHT - 1))
 			return false;
 		if (myMap.getCells()[xcood][ycood] instanceof Organism) {
 			return false;
@@ -104,34 +106,34 @@ abstract public class Organism extends GridPoint {
 	}
 
 	/**
-	 * Clear the move flag.
+	 * Clears the move flag.
 	 */
 	public void clearMoveFlag() {
 		hasMoved = false;
 	}
-
+	/**
+	 * Sets move flag's default position to true.
+	 */
 	public void setMoveFlag() {
 		hasMoved = true;
 	}
-	
+
+	/**
+	 * @return true if organism moved
+	 */
 	public boolean hasMoved() {
 		return hasMoved;
 	}
+
 	/**
-	 * Remove the organism from the world. TODO make kill return a gridpoint not
-	 * null
+	 * Remove the organism from the world.
+	 * @param locX =  X location 
+	 * @param locY =  Y location
 	 */
-	public void kill(int locX,int locY) {
+	public void kill(int locX, int locY) {
 		GridPoint X = new GridPoint();
 		myMap.setCell(locX, locY, X);
 	}
 
-	public void moveToEmpty() {
-
-		// Remember to avoid moving a critter that has already moved this
-		// turn....
-
-		// YOUR CODE HERE!
-	}
 
 }

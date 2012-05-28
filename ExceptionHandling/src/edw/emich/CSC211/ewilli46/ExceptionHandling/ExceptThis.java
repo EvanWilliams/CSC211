@@ -33,5 +33,16 @@ public class ExceptThis {
 			}
 		} while (hasNotEnteredTwoNumbers);
 	}
-
+	
+//	public static class returnRatio{
+//		
+//		Scanner scan = new Scanner( System.in); 
+//		int n1, n2; 
+//		double r;{ 
+//		n1 = scan.nextInt(); 
+//		n2 = scan.nextInt(); 
+//		r = ( double) n1 / n2; 
+//		
+//		}
+//	}
 }

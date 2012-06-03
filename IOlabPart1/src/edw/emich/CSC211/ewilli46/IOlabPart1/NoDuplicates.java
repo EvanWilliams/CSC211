@@ -8,22 +8,20 @@ public class NoDuplicates {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		String s;
 		try {
-			BufferedReader inputStream = new BufferedReader(
-					new FileReader(
-							"C:/temp/ExtraSpaces"));
-			PrintWriter outputStream = new PrintWriter(
-					new FileOutputStream(
-							"C:/temp/NoExtraSpaces"));
+			BufferedReader inputStream = new BufferedReader(new FileReader(
+					"./ExtraSpaces.txt"));
+			PrintWriter outputStream = new PrintWriter(new FileOutputStream(
+					"./NoExtraSpaces.txt"));
 
 			int count = 0;
 			String line = inputStream.readLine();
-			while (line != null)
-			{
+			while (line != null) {
 				count++;
-				RemoveWhitespace(line);
-				outputStream.println(count + " " + line);
+				s = RemoveWhitespace(line);
+				outputStream.println(count + ")" + s);
+				System.out.println(count + ")" + s);
 				line = inputStream.readLine();
 			}
 			inputStream.close();
@@ -31,22 +29,33 @@ public class NoDuplicates {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("problem opening files.");
-			
+
 		} catch (IOException e) {
 			System.out.println("Error reading from original.txt");
 		}
-//		for(i=0;i<count;i++)
-		
 	}
-	public String RemoveWhitespace(String s)
-	{	
-		int Second,ind,First;
-		ind = s.length();
+
+	public static String RemoveWhitespace(String s) {
+		int First, len, Second;
+		len = s.length();
 		First = s.indexOf(' ');
-		if(First !=-1)
-			while(First<ind)
-		Second = s.indexOf(' ',First+1);
-		
-		
-		}
+		Second = s.indexOf(' ', First + 1);
+		do {
+			First = s.indexOf(' ', Second - 1);
+			Second = s.indexOf(' ', First + 1);
+			for (int i = 0; i < len - 1; i++) {
+
+				while (Second == First + 1) {
+					s = s.substring(0, First + 1)
+							+ s.substring(Second + 1, len);
+					len = s.length();
+					First = s.indexOf(' ');
+					Second = s.indexOf(' ', (First + 1));
+				}
+			}
+		} while (Second != -1 && First != -1);
+		// String s2 = s;
+		return s;
+
+	}
 }

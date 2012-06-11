@@ -6,13 +6,17 @@ public class CalcInterest {
 	static double rate = 0;
 	static double years = 0;
 	public static boolean continueLoop;
+//Evan Williams
+//CSC211 Evett
+//2012-6-11
 
 	public static void main(String[] args) {
 		double n1 = 0;
 		double d1 = 0;
 		double d2 = 0;
 		continueLoop = true;
-
+//Do try While to create a looping prompt that handles exception
+		
 		Scanner scan = new Scanner(System.in);
 		do {
 			try {
@@ -45,7 +49,7 @@ public class CalcInterest {
 
 		} while (continueLoop == true);
 	}
-
+//The calculations and recursion
 	public static void calcSavings(double b, double r, double y) {
 		balance = b;
 		rate = r;

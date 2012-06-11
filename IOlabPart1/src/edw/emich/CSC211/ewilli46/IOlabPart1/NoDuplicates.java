@@ -71,3 +71,12 @@ public class NoDuplicates {
 
 	}
 }
+
+//OUTPUT:
+//1)Abc
+//2) 123 w q a
+//3) s e w
+//4) ss df s
+//5) Now is the time for all
+//6) good people to come to the
+//7) aid of their computers. 

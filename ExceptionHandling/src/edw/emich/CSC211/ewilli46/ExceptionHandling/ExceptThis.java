@@ -5,9 +5,6 @@ import java.util.Scanner;
 
 public class ExceptThis {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int n1, n2;
@@ -24,11 +21,11 @@ public class ExceptThis {
 				System.out.println("The Quotient of n1 and n2 is : " + r);
 				hasNotEnteredTwoNumbers = false;
 
-			} catch (InputMismatchException e) {
+				} catch (InputMismatchException e) {
 				System.out
 				.println("one of both of your integers is invalid \n");
 
-			} finally {
+				} finally {
 				scan.nextLine();
 			}
 		} while (hasNotEnteredTwoNumbers);

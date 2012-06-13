@@ -9,7 +9,8 @@ public class Post {
 		name = c;
 		topDisc = 0;
 	}
-
+//Method in Post to add disk(int) from discs[]
+	//creates a stack and updates where the top is in the array
 	public void addDisc(int x) {
 
 		discs[topDisc] = x;
@@ -18,13 +19,14 @@ public class Post {
 		else
 			return;
 	}
-
+//Method in post to remove a disk(int) from discs[]
+	//Updates the stack
 	public int removeDisc() {
 		if (discs.length != 0)
 			topDisc--;
 		return discs[topDisc];
 	}
-
+//Debugging tool
 	public String Show() {
 		String out = "";
 		for (int i = 0; i < topDisc; i++) {

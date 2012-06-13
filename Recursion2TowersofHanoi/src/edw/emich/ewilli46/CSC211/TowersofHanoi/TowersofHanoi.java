@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class TowersofHanoi {
 	/**
+	 * Evan Williams
+	 * RecursionPart2-Towers of Hanoi
+	 * CSC211 Summer 2012
+	 * 
 	 * @param args
 	 */
 	
@@ -18,12 +22,10 @@ public class TowersofHanoi {
 				System.out.println("This Program moves Disks from one post to another.");
 				System.out.println("There are 4 Disks and 3 posts.");
 				System.out.println("Only smaller plates may sit on larger ones.");
-				System.out.println("Where would you like to move?");
-				System.out.println("enter an Int for the FromPost ");
 
 				
 
-				System.out.println("You want to move all of the disks from "
+				System.out.println("Moveing all of the disks from "
 						+ "A to B \n");
 				continueLoop = false;
 			}
@@ -45,3 +47,27 @@ public class TowersofHanoi {
 
 	}
 }
+//
+//OutPut:
+//	Hello and welcome to the Towers of Hanoi Program.
+//	This Program moves Disks from one post to another.
+//	There are 4 Disks and 3 posts.
+//	Only smaller plates may sit on larger ones.
+//	Moveing all of the disks from A to B 
+//
+//	Drawing the board
+//	Move 1 From A To C
+//	Move 2 From A To B
+//	Move 1 From C To B
+//	Move 3 From A To C
+//	Move 1 From B To A
+//	Move 2 From B To C
+//	Move 1 From A To C
+//	Move 4 From A To B
+//	Move 1 From C To B
+//	Move 2 From C To A
+//	Move 1 From B To A
+//	Move 3 From C To B
+//	Move 1 From A To C
+//	Move 2 From A To B
+//	Move 1 From C To B

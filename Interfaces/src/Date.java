@@ -7,7 +7,9 @@
  */
 import java.util.Scanner;
 
-public class Date extends Object
+//Date now implements Cloneable
+
+public class Date extends Object implements Cloneable
 {
     private String month;
     private int day;
@@ -19,6 +21,14 @@ public class Date extends Object
         day = 1;
         year = 1000;
     }
+    //Protected clone method fix
+    public Object clone() {
+    	try
+    	{
+    	return super.clone();
+    	}
+    	catch(Exception e){ return null; }
+    	}
 
    
     public Date(int monthInt, int day, int year)
@@ -165,8 +175,10 @@ public class Date extends Object
         return (month + " " + day + ", " + year);
     }
     
-    pblic Date clonex(Date otherDate) throws CloneNotSupportedException
+    public Date clone(Date otherDate) throws CloneNotSupportedException
     {
+    	if (otherDate==null)
+    		return null;
     	Date newDate = (Date) otherDate.clone();
 		return newDate;
     }

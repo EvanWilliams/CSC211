@@ -1,28 +1,42 @@
 package edw.emich.ewilli46.CSC211.TowersofHanoi;
 
 public class Hanoi {
-	boolean HasMoved = false;
-	Disc temp = new Disc(0);
-	int NumDisks = 4;
-	int NumPosts = 3;
-	String ToPost;
+	//private boolean HasMoved = false;
+	// private int NumDisks = 4;
+	// private int NumPosts = 3;
+	private String ToPost;
+	private String FromPost;
+	private Post source = new Post("A");
+	private Post dest = new Post("B");
+	private Post spare = new Post("C");
+	int Disc;
+//	private Disc top = new Disc(1);
+//	private Disc second = new Disc(2);
+//	private Disc third = new Disc(3);
+//	private Disc bot = new Disc(4);
 
+	Hanoi(){
+		source.addDisc(4);
+		source.addDisc(3);
+		source.addDisc(2);
+		source.addDisc(1);
+	}
 	public String getToPost() {
 		return ToPost;
 	}
 
-	public void setToPost(String toPost) {
-		ToPost = toPost;
-	}
+//	public void setToPost(String toPost) {
+//		ToPost = toPost;
+//	}
+//
+//	public String getFromPost() {
+//		return FromPost;
+//	}
 
-	public String getFromPost() {
-		return FromPost;
-	}
-
-	public String PrintBoard(int numDisks, String fromPost, String toPost) {
-		MoveTower(top, source, dest, spare);
-		return ("complete");
-	}
+//	public String PrintBoard(int numDisks, String fromPost, String toPost) {
+//		MoveTower(top, source, dest, spare);
+//		return ("complete");
+//	}
 
 	/**
 	 * Printing out the details of the move
@@ -34,100 +48,41 @@ public class Hanoi {
 	 * @param To
 	 *            - the To Post
 	 */
-	public void Print(Disc d, Post From, Post To) {
-		System.out.println("Move " + d.getNumber() + " From " + From.toString()
+	public void Print(int i, Post From, Post To) {
+		System.out.println("Move " + i + " From " + From.toString()
 				+ " To " + To.toString());
 	}
 
-	public void MoveTower(Disc d, Post Scource, Post Dest, Post Spare) {
+	public void MoveTower() {
+		MoveTower(4, source, dest, spare);
+	}
+	
+	
+//	Function MoveTower(disc, Source,Dest,spare) :
+//		if disc==1
+//			move disc from source to dest
+//		Else:
+//			MoveTower(disc-1 , Source,spare,dest)
+//			move disc from source to dest
+//			MoveTower(disc-1 , spare , dest, source)
+	//End If
+	private void MoveTower(int d, Post Source, Post Dest, Post Spare) {
+		if (d==1)
+		{
+			Dest.addDisc(Source.removeDisc());
+			Print(d,Source,Dest);
+		}
+		else	
+		{
+			MoveTower(d-1,Source,Spare,Dest);
+			Dest.addDisc(Source.removeDisc());
+			Print(d,Source,Dest);
+			MoveTower(d-1,Spare,Dest,Source);
+		}
 		
-		if (top.OnPost != ToPost && second.OnPost != ToPost
-				&& third.OnPost != ToPost && bot.OnPost != ToPost) {
-			if (d.getNumber() == 1) {
-				if (d.OnPost == Spare.toString()) {
-					d.OnPost = Dest.toString();
-					HasMoved = true;
-					Dest.topPost = 1;
-					Print(d, Spare, Dest);
-				}
-			} else if (d.OnPost == Dest.toString()) {
-				d.OnPost = Scource.toString();
-				HasMoved = true;
-				Scource.topPost = 1;
-				Print(d, Dest, Scource);
-			}
-
-			else if (d.OnPost == Scource.toString()) {
-				d.OnPost = Spare.toString();
-				HasMoved = true;
-				Spare.topPost = 1;
-				Print(d, Scource, Spare);
-			}
-
-			// else if (d.number != 1) {
-			// if (Spare.topPost < d.number) {
-			// d.OnPost = Dest.ToString();
-			// HasMoved = true;
-			// Dest.topPost = d.number;
-			// Print(d, Scource, Dest);
-			// count++;
+		
+	
 		}
 
-		if (Dest.topPost > d.getNumber()) {
-			d.OnPost = Dest.toString();
-			HasMoved = true;
-			Dest.topPost = d.getNumber();
-			Print(d, Spare, Dest);
-		}
 
-		else if (Dest.topPost < d.getNumber()) {
-			d.OnPost = Spare.toString();
-			HasMoved = true;
-			Spare.topPost = d.getNumber();
-			Print(d, Scource, Spare);
-		}
-
-		MoveTower(NextDisc(d), Scource, Dest, Spare);
-
-		return;
 	}
-
-	public void setFromPost(String fromPost) {
-		FromPost = fromPost;
-	}
-
-	String FromPost;
-
-	Post source = new Post('A', 0);
-	Post dest = new Post('B', 0);
-	Post spare = new Post('C', 0);
-	Disc top = new Disc(1);
-	Disc second = new Disc(2);
-	Disc third = new Disc(3);
-	Disc bot = new Disc(4);
-
-	public void SetStart() {
-		top.setOnPost(source.toString());
-		source.topPost = 1;
-		second.OnPost = source.toString();
-		third.OnPost = source.toString();
-		bot.OnPost = source.toString();
-	}
-
-	Disc NextDisc(Disc d) {
-		if (d.getNumber() == 1) {
-			return (second);
-		}
-		if (d.getNumber() == 2) {
-			return (third);
-		}
-		if (d.getNumber() == 3) {
-			return (bot);
-		}
-		if (d.getNumber() == 4) {
-			return (top);
-		}
-		return null;
-	}
-
-}

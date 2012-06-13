@@ -3,7 +3,6 @@ package edw.emich.ewilli46.CSC211.TowersofHanoi;
 public class Disc {
 	public String OnPost;
 	private int number;
-	
 
 	public Disc(int x) {
 		number = x;
@@ -15,6 +14,12 @@ public class Disc {
 
 	public void setOnPost(String onPost) {
 		OnPost = onPost;
+	}
+
+	Disc NextDisc() {
+		if (number != 0)
+			number--;
+		return this;
 	}
 
 	public int getNumber() {

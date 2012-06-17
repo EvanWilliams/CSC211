@@ -26,7 +26,7 @@ public class NameCollection {
 		}
 
 		public boolean hasNext() {
-			if (name.length > place+1) {
+			if (name.length >= place+1) {
 				return true;
 			} else
 				return false;

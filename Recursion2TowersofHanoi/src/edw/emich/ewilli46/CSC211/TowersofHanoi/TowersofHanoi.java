@@ -28,7 +28,7 @@ public class TowersofHanoi {
 				System.out.println("Moveing all of the disks from "
 						+ "A to B \n");
 				continueLoop = false;
-			}
+			}a
 
 			catch (InputMismatchException e) {
 				System.out.println("one of both of your entries is invalid \n");
@@ -53,7 +53,7 @@ public class TowersofHanoi {
 //	This Program moves Disks from one post to another.
 //	There are 4 Disks and 3 posts.
 //	Only smaller plates may sit on larger ones.
-//	Moveing all of the disks from A to B 
+//	Moving all of the disks from A to B 
 //
 //	Drawing the board
 //	Move 1 From A To C

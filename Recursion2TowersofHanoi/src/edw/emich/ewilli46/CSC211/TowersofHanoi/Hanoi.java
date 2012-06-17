@@ -46,7 +46,7 @@ public class Hanoi {
 			Print(d,Source,Dest);
 			MoveTower(d-1,Spare,Dest,Source);
 		}
-		
+	
 		
 	
 		}

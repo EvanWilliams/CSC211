@@ -28,7 +28,7 @@ public class TowersofHanoi {
 				System.out.println("Moveing all of the disks from "
 						+ "A to B \n");
 				continueLoop = false;
-			}a
+			}
 
 			catch (InputMismatchException e) {
 				System.out.println("one of both of your entries is invalid \n");

@@ -16,7 +16,7 @@ public class NameCollection {
 		FooEnum collect = new FooEnum(names);
 		return collect;
 	}
-
+// Enumeration inner class
 	class FooEnum implements Enumeration {
 		int place = 0;
 		String[] name;
@@ -44,26 +44,6 @@ public class NameCollection {
 		}
 
 	}
-
-	// --------------------------------
-	// ----- ENTER YOUR CODE HERE -----
-	// --------------------------------
-	/*
-	 * You should define an inner class that implements Enumeration
-	 * //-------------------------------- // --------- END USER CODE --------
-	 * //--------------------------------
-	 * 
-	 * /** getEnumeration should return an instance of your inner class that
-	 * implements the Enumeration interface where hasNext() and getNext()
-	 * correspond to data stored within the names array.
-	 */
-
-	// --------------------------------
-	// ----- ENTER YOUR CODE HERE -----
-	// --------------------------------
-
-	// --------------------------------
-	// --------- END USER CODE --------
-	// --------------------------------
+// --------------------------------
 
 }

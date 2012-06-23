@@ -13,7 +13,8 @@
 class SListNode
 {
     // Data members
-    private Object element;         // List element
+    private Object element;
+    // List element
     private SListNode next;         // Reference to the next element
     
     // Constructor
@@ -21,6 +22,8 @@ class SListNode
         // Creates a list node containing element elem and next pointer
         // nextPtr.
     {
+    	element = elem;
+    	next = nextPtr;
 
     }
     
@@ -33,7 +36,7 @@ class SListNode
     
     SListNode setNext( SListNode nextVal )  // Set reference to next element
     {
-		return nextVal;                                       //  & return that reference
+		return next = nextVal;
 
     }
     
@@ -45,7 +48,7 @@ class SListNode
     
     void setElement(Object newElem)         // Set current element to newElem 
     {                                 
-
+    	element = newElem;
     }
     
 } // class SListNode

@@ -10,70 +10,70 @@
 //
 //--------------------------------------------------------------------
 
-class SList implements List
-{
-    // Data members
-    private SListNode head,     // Reference to the beginning of the list
-        cursor; // Reference to current cursor position
-    
-    // Constructors & Helper Method
-    SList (  )                  // Default constructor: Creates an empty list
-    {
+class SList implements List {
+	// Data members
+	private SListNode head, // Reference to the beginning of the list
+			cursor; // Reference to current cursor position
+	private SListNode Slist[];
 
-    }
+	// Constructors & Helper Method
+	SList(int x, SListNode LHead) // Default constructor: Creates an empty list
+	{
+		Slist = new SListNode[x];
+		Slist[0] = LHead;
+		head = LHead;
+		cursor = LHead;
+		for(int i =0;i<x;i++)
+		{
+			
+		}
 
+	}
 
-    // ----- Insert method definitions for the interface List here ------ //
+	// --------------------------------------------------------------------
+	//
+	// In-lab operations
+	//
+	// --------------------------------------------------------------------
 
+	void moveToBeginning() // Move to beginning
+	{
 
-    //--------------------------------------------------------------------
-    //
-    //                        In-lab operations
-    //
-    //--------------------------------------------------------------------
+	}
 
-    void moveToBeginning ( )                    // Move to beginning
-    {
+	void insertBefore(Object newElement) // Insert before cursor
+	{
 
-    }
-
-    void insertBefore ( Object newElement )     // Insert before cursor
-    {
-
-    }
-
+	}
 
 	@Override
 	public void insert(Object newElement) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void remove() {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void replace(Object newElement) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public boolean isFull(){
+	public boolean isFull() {
 		return false;
-		
+
 	}
-	
+
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public boolean isEmpty() {
@@ -81,13 +81,11 @@ class SList implements List
 		return false;
 	}
 
-
 	@Override
 	public boolean gotoBeginning() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 	@Override
 	public boolean gotoEnd() {
@@ -95,13 +93,11 @@ class SList implements List
 		return false;
 	}
 
-
 	@Override
 	public boolean gotoNext() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 	@Override
 	public boolean gotoPrior() {
@@ -109,18 +105,16 @@ class SList implements List
 		return false;
 	}
 
-
 	@Override
 	public Object getCursor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
 	public void showStructure() {
 		// TODO Auto-generated method stub
-		
+
 	}
-    
+
 } // class SList

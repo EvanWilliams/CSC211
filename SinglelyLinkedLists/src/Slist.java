@@ -15,7 +15,7 @@ import java.util.Scanner;
 class SList implements List {
 	// Data members
 	private SListNode head, // Reference to the beginning of the list
-	cursor; // Reference to current cursor position
+			cursor; // Reference to current cursor position
 
 	// Constructors & Helper Method
 	SList() // Default constructor: Creates an empty list
@@ -35,13 +35,18 @@ class SList implements List {
 	{
 		SListNode Hold = new SListNode();
 		if (cursor.next == null) {
-			cursor.next = head;
-			head = cursor;
+			Hold.element = cursor.element;
+			Hold.next = null;
+			gotoPrior();
+			cursor.next = null;
+			Hold.next = head;
+			head = Hold;
+			cursor = head;
+
 		} else {
 			Hold.element = cursor.element;
 			gotoPrior();
 			cursor.next = cursor.next.next;
-			gotoNext();
 			Hold.next = head;
 			head = Hold;
 		}

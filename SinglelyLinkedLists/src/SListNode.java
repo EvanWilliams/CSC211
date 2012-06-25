@@ -13,11 +13,18 @@
 class SListNode
 {
     // Data members
-    private Object element;
+	//DO these need to be private?
+    Object element;
     // List element
-    private SListNode next;         // Reference to the next element
+    SListNode next;         // Reference to the next element
     
     // Constructor
+    SListNode()
+    {
+    	element = null;
+    	next = null;
+    }
+    
     SListNode ( Object elem, SListNode nextPtr )
         // Creates a list node containing element elem and next pointer
         // nextPtr.

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 //--------------------------------------------------------------------
 //
 //  Laboratory 7                                         SList.jshl
@@ -13,20 +15,13 @@
 class SList implements List {
 	// Data members
 	private SListNode head, // Reference to the beginning of the list
-			cursor; // Reference to current cursor position
-	private SListNode Slist[];
+	cursor; // Reference to current cursor position
 
 	// Constructors & Helper Method
-	SList(int x, SListNode LHead) // Default constructor: Creates an empty list
+	SList() // Default constructor: Creates an empty list
 	{
-		Slist = new SListNode[x];
-		Slist[0] = LHead;
-		head = LHead;
-		cursor = LHead;
-		for(int i =0;i<x;i++)
-		{
-			
-		}
+		head = null;
+		cursor = null;
 
 	}
 
@@ -38,30 +33,44 @@ class SList implements List {
 
 	void moveToBeginning() // Move to beginning
 	{
-
+		SListNode Hold = new SListNode();
+		if (cursor.next == null) {
+			cursor.next = head;
+			head = cursor;
+		} else {
+			Hold.element = cursor.element;
+			gotoPrior();
+			cursor.next = cursor.next.next;
+			gotoNext();
+			Hold.next = head;
+			head = Hold;
+		}
 	}
 
-	void insertBefore(Object newElement) // Insert before cursor
+	public void setCursor(SListNode cursor) {
+		this.cursor = cursor;
+	}
+
+	void insertBefore(SListNode newElement) // Insert before cursor
 	{
-
+		cursor.next = newElement;
 	}
 
-	@Override
-	public void insert(Object newElement) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
-
+		if (cursor == head) {
+			cursor = null;
+			head = null;
+		} else {
+			gotoPrior();
+			if (cursor.next.next != null)
+				cursor.next = cursor.next.next;
+			else
+				cursor.next = null;
+		}
 	}
 
-	@Override
-	public void replace(Object newElement) {
-		// TODO Auto-generated method stub
-
+	public void replace(SListNode newElement) {
+		cursor = newElement;
 	}
 
 	public boolean isFull() {
@@ -69,52 +78,137 @@ class SList implements List {
 
 	}
 
-	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		head = null;
+		cursor = null;
 	}
 
-	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if (head.element == null)
+			return true;
+
 		return false;
 	}
 
-	@Override
 	public boolean gotoBeginning() {
-		// TODO Auto-generated method stub
+		if (head != null) {
+			cursor = head;
+			return true;
+		}
 		return false;
 	}
 
-	@Override
 	public boolean gotoEnd() {
-		// TODO Auto-generated method stub
+		SListNode buffer = new SListNode();
+
+		if (isEmpty() == false) {
+			buffer = head.next;
+			while (buffer.next != null) {
+				buffer = buffer.next;
+			}
+			if (buffer.next == null) {
+				cursor = buffer;
+				System.out.println("The Cursor is now at the last position");
+				return true;
+			}
+		}
+		// go to end of the list and put cursor on the last node
+		System.out.println("Could not reach the last position");
+		System.out.println("It must be that you have no values in the List");
 		return false;
 	}
 
-	@Override
 	public boolean gotoNext() {
-		// TODO Auto-generated method stub
+		if (cursor.next != null) {
+			cursor = cursor.next;
+			return true;
+		}
 		return false;
 	}
 
-	@Override
 	public boolean gotoPrior() {
-		// TODO Auto-generated method stub
+		SListNode Stepper = new SListNode();
+		if (cursor != head) {
+			if (cursor == head.next) {
+				cursor = head;
+				return true;
+			}
+			if (head.next != cursor) {
+
+				Stepper = head.next;
+				while (Stepper.next != cursor) {
+					if (Stepper.next == null) {
+						System.out.println("Fatal Error Check code");
+						return false;
+					}
+					Stepper = Stepper.next;
+				}
+				if (Stepper.next == cursor) {
+					cursor = Stepper;
+					return true;
+				}
+
+			}
+
+		}
 		return false;
 	}
 
-	@Override
 	public Object getCursor() {
-		// TODO Auto-generated method stub
-		return null;
+		return cursor;
+
 	}
 
-	@Override
 	public void showStructure() {
-		// TODO Auto-generated method stub
+		SListNode showStepper = new SListNode();
+		// Mark cursor
+		showStepper = head;
+		if (head != null) {
+			if (head.next == null) {
+				System.out.print(head.element);
+				// if(cursor == showStepper)
+				System.out.print("'");
+			} else if (head == cursor)
+				System.out.print(head.element + "'");
+			else
+				System.out.print(head.element + " ");
 
+			while (showStepper.next != null) {
+				showStepper = showStepper.next;
+				System.out.print(showStepper.element);
+				if (cursor == showStepper)
+					System.out.print("'");
+				else
+					System.out.print(" ");
+			}
+		} else if (head == null) {
+			System.out.println("Empty List");
+		}
+
+	}
+
+	public void insert(Object newElement) {
+		SListNode newNode = new SListNode();
+		if (head == null) {
+			newNode.element = newElement;
+			head = newNode;
+			cursor = newNode;
+		} else {
+			newNode.element = newElement;
+			newNode.next = cursor.next;
+			cursor.next = newNode;
+			cursor = newNode;
+		}
+
+	}
+
+	public void replace(Object newElement) {
+		SListNode aNewNode = new SListNode();
+		newElement = aNewNode.element;
+		gotoPrior();
+		cursor.next.next = aNewNode.next;
+		cursor.next = aNewNode;
+		cursor = cursor.next;
 	}
 
 } // class SList
